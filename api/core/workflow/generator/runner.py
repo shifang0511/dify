@@ -376,9 +376,7 @@ class WorkflowGenerator:
             if repaired is not None:
                 graph = cls._postprocess_graph(graph=repaired, mode=mode)
                 result["graph"] = graph
-                structural_errors = cls._validate_structure(
-                    graph=graph, mode=mode, installed_tools=installed_tools
-                )
+                structural_errors = cls._validate_structure(graph=graph, mode=mode, installed_tools=installed_tools)
                 if not structural_errors:
                     logger.info("Workflow generator: self-repair fixed all errors")
                 else:
@@ -531,9 +529,7 @@ class WorkflowGenerator:
         # Same self-repair pipeline as the full-graph path. A refined graph
         # that breaks (e.g. the LLM accidentally removed an edge) gets ONE
         # corrective round before we surface errors to the user.
-        structural_errors = cls._validate_structure(
-            graph=result["graph"], mode=mode, installed_tools=installed_tools
-        )
+        structural_errors = cls._validate_structure(graph=result["graph"], mode=mode, installed_tools=installed_tools)
         if structural_errors:
             repaired = cls._repair_graph(
                 model_instance=model_instance,

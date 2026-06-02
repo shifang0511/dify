@@ -46,6 +46,7 @@ import { test } from './test/orpc.gen'
 import { trialApps } from './trial-apps/orpc.gen'
 import { trialModels } from './trial-models/orpc.gen'
 import { website } from './website/orpc.gen'
+import { workflowGenerateNode } from './workflow-generate-node/orpc.gen'
 import { workflowGenerate } from './workflow-generate/orpc.gen'
 import { workflow } from './workflow/orpc.gen'
 import { workspaces } from './workspaces/orpc.gen'
@@ -99,5 +100,6 @@ export const contract = {
   website,
   workflow,
   workflowGenerate,
+  workflowGenerateNode,
   workspaces,
 }

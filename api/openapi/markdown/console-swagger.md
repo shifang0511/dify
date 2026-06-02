@@ -8381,6 +8381,27 @@ Generate a Dify workflow graph from natural language
 | 400 | Invalid request parameters |
 | 402 | Provider quota exceeded |
 
+### /workflow-generate-node
+
+#### POST
+##### Description
+
+Refine one node of an existing generated workflow graph
+
+##### Parameters
+
+| Name | Located in | Description | Required | Schema |
+| ---- | ---------- | ----------- | -------- | ------ |
+| payload | body |  | Yes | [WorkflowRegenerateNodePayload](#workflowregeneratenodepayload) |
+
+##### Responses
+
+| Code | Description |
+| ---- | ----------- |
+| 200 | Node refinement completed |
+| 400 | Invalid request parameters |
+| 402 | Provider quota exceeded |
+
 ### /workflow/{workflow_run_id}/events
 
 #### GET
@@ -16363,6 +16384,23 @@ can reuse its existing handler.
 | ---- | ---- | ----------- | -------- |
 | paused_at | string |  | No |
 | paused_nodes | [ [PausedNodeResponse](#pausednoderesponse) ] |  | Yes |
+
+#### WorkflowRegenerateNodePayload
+
+Payload for per-node refinement of an existing generated graph.
+
+The frontend ships the current preview graph alongside the target node
+id and the user's free-text refinement. Returns the SAME envelope as
+``/workflow-generate`` — full graph + errors + repair_attempts — so
+the frontend can re-use the existing rendering path.
+
+| Name | Type | Description | Required |
+| ---- | ---- | ----------- | -------- |
+| graph | object | Current graph: {nodes, edges, viewport} | Yes |
+| mode | string | Target app mode for the graph<br>*Enum:* `"advanced-chat"`, `"workflow"` | Yes |
+| model_config | [ModelConfig](#modelconfig) | Model configuration | Yes |
+| node_id | string | Id of the node to refine; must exist in graph.nodes | Yes |
+| refinement | string | Free-text instruction describing the desired change | Yes |
 
 #### WorkflowResponse
 
